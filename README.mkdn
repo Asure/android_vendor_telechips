@@ -1,0 +1,47 @@
+Telechips TCC8902
+=================
+
+Preface
+-------
+This is a basic TCC8902 recovery image builder
+
+Device
+------
+Basic device is the HSG-X5A tablet button-layout. This also works on Gentouch models.
+We'll fork the device and sort that out later on. :)
+
+Getting started
+---------------
+
+To initialize your local repository using the Koush eclair tree, use a command like this:
+
+    repo init -u git://github.com/koush/android.git -b eclair
+
+Then to sync up:
+
+    repo sync
+
+Add the tcc8902 device folder and change to it:
+
+    mkdir -p vendor/telechips/tcc8902
+    cd vendor/telechips/tcc8902
+
+Init the repo for that folder:
+
+    repo init -u git://github.com:Asure/android_vendor_telechips.git
+    repo sync
+
+Edit the following files to add the tcc8902 target for lunch combo:
+    
+    vendor/koush/vendorsetup.sh
+    vendor/koush/products/koush_tcc8902.mk
+    vendor/koush/products/AndroidProducts.mk
+    
+Now you should be able to do the following:
+
+    . build/envsetup.sh
+    lunch
+
+Choose the tcc8902 combo from the list, wait for it to finish, then:
+
+    make -j4 recoveryimage
